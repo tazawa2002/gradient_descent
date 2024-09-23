@@ -1,0 +1,6 @@
+*.o
+*.dat
+*.exe
+*.png
+*.gif
+.vscode
