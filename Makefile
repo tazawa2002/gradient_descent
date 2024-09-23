@@ -12,7 +12,10 @@ gradient_descent.o: gradient_descent.cpp optimizer.o
 optimizer.o: optimizer.cpp
 	g++ -c optimizer.cpp -std=c++11
 
-gradient_descent.dat: gradient_descent.exe
+exe:
+	./gradient_descent.exe
+
+gradient_descent.dat:
 	./gradient_descent.exe
 
 plot: gradient_descent.gif
