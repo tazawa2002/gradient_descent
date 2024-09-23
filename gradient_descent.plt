@@ -7,8 +7,8 @@ set key opaque
 set key box
 set key spacing 1.5
 
-# set xrange [-2:2]
-# set yrange [-1:3]
+set xrange [-2:2]
+set yrange [-1:3]
 set cbrange [0:2500]
 # set palette defined (0 "#440154", 0.2 "#482878", 0.4 "#3E4A89", 0.6 "#2A788E", 0.8 "#22A884", 1 "#FDE725")
 set palette defined (0 "#FDE725", 0.2 "#22A884", 0.4 "#2A788E", 0.6 "#3E4A89", 0.8 "#482878", 1 "#440154")
