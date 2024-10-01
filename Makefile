@@ -1,7 +1,7 @@
 # Makefile
 
 # デフォルトのターゲット
-all: gradient_descent.exe plot
+all: gradient_descent.exe
 
 gradient_descent.exe: gradient_descent.o optimizer.o
 	g++ -o gradient_descent.exe gradient_descent.o optimizer.o -std=c++11
