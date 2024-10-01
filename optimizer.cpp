@@ -227,10 +227,10 @@ double NewtonRaphsonOptimizer::calc_hessian_yy(double x, double y, std::function
 
 double NewtonRaphsonOptimizer::calc_hessian_xy(double x, double y, std::function<double(double, double)> func) {
     double epsilon = 1e-6;
-    return (calc_gradient_y(x + epsilon, y, func) - calc_gradient_y(x, y, func)) / (epsilon);
+    return (calc_gradient_y(x + epsilon, y, func) - calc_gradient_y(x - epsilon, y, func)) / (2 * epsilon);
 }
 
 double NewtonRaphsonOptimizer::calc_hessian_yx(double x, double y, std::function<double(double, double)> func) {
     double epsilon = 1e-6;
-    return (calc_gradient_x(x, y + epsilon, func) - calc_gradient_x(x, y, func)) / (epsilon);
+    return (calc_gradient_x(x, y + epsilon, func) - calc_gradient_x(x, y - epsilon, func)) / (2 * epsilon);
 }
