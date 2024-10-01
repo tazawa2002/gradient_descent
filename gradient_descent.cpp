@@ -9,7 +9,7 @@ int max_steps = 10000;         // 最大ステップ数
 
 double rosenbrock(double x, double y);
 void heatmap(double x_min, double x_max, double y_min, double y_max, std::function<double(double, double)> function);
-void save_data(std::ofstream &data_file, int step, double x, double y, double f);
+void save_data(std::ofstream &data_file, int step, double x, double y, double f, double grad);
 
 int main() {
     double x = -1.5; // -1.5; // 初期値 x
@@ -72,18 +72,20 @@ int main() {
         std::cerr << "ファイルが開けませんでした。" << std::endl;
         return 1;
     }
+    data_file << "# step  x  y  f(x,y)  |∇f(x,y)|" << std::endl;
 
     // 初期値の書き込み
-    save_data(data_file, 0, x, y, function(x, y));
+    save_data(data_file, 0, x, y, function(x, y), 0);
     
 
     // 勾配降下法のループ
-    for (int step = 1; step <= max_steps; ++step) {
-        double grad_x, grad_y;
+    for (int step = 1; step <= max_steps; step++) {
+        double grad_x, grad_y, grad;
         gradient(x, y, function, grad_x, grad_y);
         // stochastic_gradient(x, y, function, grad_x, grad_y);
+        grad = sqrt(grad_x*grad_x + grad_y*grad_y);
         optimizer->update(x, y, grad_x, grad_y); // 更新関数の呼び出し
-        save_data(data_file, step, x, y, function(x, y)); // 更新後の値を保存
+        save_data(data_file, step, x, y, function(x, y), grad); // 更新後の値を保存
 
         // 収束判定 (勾配が小さい場合に停止)
         gradient(x, y, function, grad_x, grad_y);
@@ -126,6 +128,6 @@ void heatmap(double x_min, double x_max, double y_min, double y_max, std::functi
 }
 
 // 更新したx, yの値をファイルに保存する関数
-void save_data(std::ofstream &data_file, int step, double x, double y, double f) {
-    data_file << step << " " << x << " " << y << " " << f << std::endl;
+void save_data(std::ofstream &data_file, int step, double x, double y, double f, double grad) {
+    data_file << step << " " << x << " " << y << " " << f << " " << grad << std::endl;
 }

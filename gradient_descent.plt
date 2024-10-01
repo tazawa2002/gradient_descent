@@ -23,10 +23,25 @@ set grid
 # ヒートマップのプロット
 set pm3d map
 
-step = 10
+step = 200
+max_step = STATS_records
 
-do for [i=0:(STATS_records-1)/step] {
+do for [i=0:(max_step-1)/step] {
     splot 'heatmap.dat' using 1:2:3 notitle with pm3d, \
           'gradient_descent.dat' index 0 using 2:3:(0) every ::0::((i*step>0)?(i*step-1):0) with points pt 7 ps 0.5 lc rgb "white" notitle, \
           'gradient_descent.dat' index 0 using 2:3:(0) every ::i*step::i*step with points pt 7 ps 1 lc rgb "black" title sprintf("Step %d", i*step)
 }
+
+set terminal png size 800,600
+set output 'gradient_descent.png'
+
+set size noratio
+unset xrange
+unset yrange
+set xrange [1:]
+set logscale y
+set format y "10^{%L}"
+
+plot "gradient_descent.dat" using 1:5 w l
+
+unset logscale y
