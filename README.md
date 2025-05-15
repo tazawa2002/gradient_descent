@@ -21,7 +21,7 @@
 ### 1. 通常の勾配法 (NormalOptimizer)
 - **学習率 (Learning Rate):** 0.001
 - **可視化:**
-  ![NormalOptimizer](img/normal.gif)
+  ![NormalOptimizer](img/nomal.gif)
 
 ### 2. モーメンタム法 (MomentumOptimizer)
 - **学習率 (Learning Rate):** 0.001
